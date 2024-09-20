@@ -1,7 +1,7 @@
 const { multiply, divide, sum, sub } = require("../calculate");
 
 // const sum = require("../sum");
-require("../calculate")
+// require("../calculate")
 
 test("adds 1 + 2 to equal 3", () => {
 	expect(sum(1, 2)).toBe(3);

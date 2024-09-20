@@ -2,7 +2,7 @@
 	"name": "calculs",
 	"version": "1.0.0",
 	"scripts": {
-		"test": "jest"
+		"test": "jest --coverage test/"
 	},
 	"dependencies": {
 		"eslint": "^9.10.0",

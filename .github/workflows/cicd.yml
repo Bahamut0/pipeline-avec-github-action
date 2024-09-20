@@ -24,7 +24,7 @@ concurrency:
 #   MY_VARIABLE: 'This is a variable'
 
 jobs:
-    unit_test_jest:
+    build-and-test:
         runs-on: ubuntu-latest
         defaults:
           run:
@@ -35,6 +35,11 @@ jobs:
                 node-version: [22.x]
         
         steps:
+
+      
+      ################################
+      # Build #
+      ################################
         - name: Checkout - Récuparation du projet
           uses: actions/checkout@v4
         - name: Liste des fichiers et répertoires du dossier courant
@@ -45,6 +50,21 @@ jobs:
         - name: Liste des dépendances installées
           run: npm list
 
+      
+      ################################
+      # Test Linter  #
+      ################################
+        - name: Lint Code Base
+          uses: github/super-linter@v4
+          env:
+            VALIDATE_ALL_CODEBASE: false
+            DEFAULT_BRANCH: main
+            GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
+
+
+      ################################
+      # Test Jest #
+      ################################
         - name: Test avec Jest
           # run: ./node_modules/.bin/jest --coverage test/sum.test.js
           run: npm test
@@ -54,36 +74,13 @@ jobs:
           with:
             token: ${{ secrets.COVERALLS_TOKEN }}
 
-        - name: Répertoire courant 
-          run : ls
-
-      ################################
-      # Run Linter against code base #
-      ################################
-        - name: Lint Code Base
-          uses: github/super-linter@v4
-          env:
-            VALIDATE_ALL_CODEBASE: false
-            DEFAULT_BRANCH: main
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-    check_success:
-      runs-on: ubuntu-latest
-      # if: always() && (needs.unit_test_jest.result == 'success')
-      needs: [unit_test_jest]
-      steps:
-      - name: Annonce que le job est en cours           
-        run: |
-          echo "Second Job Running"
-
-      # Single deploy job since we're just deploying
+      
     deploy:
       environment:
         name: github-pages
         url: ${{ steps.deployment.outputs.page_url }}
       runs-on: ubuntu-latest
-      needs: [unit_test_jest]
+      needs: [build-and-test]
       steps:
         - name: Checkout
           uses: actions/checkout@v4

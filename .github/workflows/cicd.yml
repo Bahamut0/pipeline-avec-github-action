@@ -92,3 +92,41 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+    
+  registry:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Connexion au Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Extraction des metadata (tags, labels) pour Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          # images: my-docker-hub-namespace/my-docker-hub-repository
+          images: zock/calculs
+          tags: | 
+            type=semver,pattern={{version}}
+
+      - name: Construire et pousser l'image Docker
+        id: push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      # - name: Générer l'attestation de l'artifact 
+      #   uses: actions/attest-build-provenance@v1
+      #   with:
+      #     subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+      #     subject-digest: ${{ steps.push.outputs.digest }}
+      #     push-to-registry: true
+      

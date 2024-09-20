@@ -123,7 +123,6 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=sh
 
 
       - name: Construire et pousser l'image Docker

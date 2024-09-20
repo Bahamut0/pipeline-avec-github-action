@@ -27,8 +27,10 @@ concurrency:
 #   MY_VARIABLE: 'This is a variable'
 
 jobs:
+
   build-and-test:
-      runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+      runs-on: self-hosted
       defaults:
         run:
           working-directory: ./src
@@ -74,8 +76,10 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           token: ${{ secrets.COVERALLS_TOKEN }}
+
       
   deploy:
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -95,7 +99,9 @@ jobs:
         uses: actions/deploy-pages@v4
     
   registry:
-    runs-on: ubuntu-latest
+
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy]
     steps:
 
@@ -113,12 +119,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # images: my-docker-hub-namespace/my-docker-hub-repository
           images: zock/calculs
           tags: ${{github.run_number}}
 
 
-      - name: Construire et pousser l'image Docker
+      - name: Construire et pousser l'image Docker dans Dockerhub
         id: push
         uses: docker/build-push-action@v5
         with:

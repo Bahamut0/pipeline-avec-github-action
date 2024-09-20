@@ -116,7 +116,7 @@ jobs:
           # images: my-docker-hub-namespace/my-docker-hub-repository
           images: zock/calculs
           # tags: ${{ steps.meta.outputs.tags }}
-          tags: ${{runNumber}}
+          tags: ${{github.run_number}}
 
 
       - name: Construire et pousser l'image Docker

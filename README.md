@@ -6,7 +6,8 @@
 - Jest => test
 - Node JS => environnement
 - Github Action => CICD
-- Docker Hub => Déploiement de l'image sur un registre docker
+- Docker Hub => Déploiement de l'image sur un registre 
+
 
 
 ## Mise en place du projet
@@ -23,8 +24,15 @@ npm jest
 - Création des conteneurs pour le projet
 
     - Nodejs => comme backend avec Dockerfile
-    - Nginx => comme front-end avec image pulled
+    - Nginx => comme front-end avec image
+
+
+### Ajout d'un runner (machine) qui exécutera le workflow à la place des vms de github
+
+    => depuis le projet, se rendre sur : settings/actions/runners 
+    => cliquer sur ajouter et saisir les différentes commandes sur la machine qui servira de runner
 
 
 
+### Bonus - Remplacer par l'image du dockerfile par une version distroless
 

@@ -1,19 +1,42 @@
-FROM node:22
+# Version distroless
+
+FROM node:22 AS build-env
 
 RUN mkdir -p /app
 
+COPY ./src/package*.json ./
+COPY . /app
+
 WORKDIR /app
 
-COPY ./src/package*.json ./
+# installer les dépendances sans le dev
+RUN npm install --omit=dev
 
-RUN npm install
+FROM gcr.io/distroless/nodejs22-debian12
 
-COPY . .
+COPY --from=build-env /app /app
 
-EXPOSE 3000
+WORKDIR /app
 
-RUN ls
-# ENTRYPOINT npm run
-# ENTRYPOINT npm test
-CMD [ "npm", "start" ]
-# CMD [ "node", "calculate.js" ]
+CMD ["index.js"]
+
+
+
+# Version lourde
+
+# FROM node:22
+
+# RUN mkdir -p /app
+
+# WORKDIR /app
+
+# COPY ./src/package*.json ./
+
+# RUN npm install
+
+# COPY . .
+
+# EXPOSE 3000
+
+# CMD [ "npm", "start" ]
+

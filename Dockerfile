@@ -1,6 +1,8 @@
 FROM node:22
 
-WORKDIR /usr/src/app
+RUN mkdir -p /app
+
+WORKDIR /app
 
 COPY ./src/package*.json ./
 
@@ -12,5 +14,6 @@ EXPOSE 3000
 
 RUN ls
 # ENTRYPOINT npm run
-ENTRYPOINT npm test
+# ENTRYPOINT npm test
+CMD [ "npm", "start" ]
 # CMD [ "node", "calculate.js" ]

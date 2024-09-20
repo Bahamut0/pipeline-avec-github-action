@@ -2,7 +2,11 @@
 	"name": "calculs",
 	"version": "1.0.0",
 	"scripts": {
-		"test": "jest --coverage test/"
+		"test": "jest --coverage test/",
+		"start": "node /app/public/scripts/index.js",
+		"watch": "node --watch /app/public/scripts/index.js",
+		"watch:js": "onchange 'src/js/*.js' -- npm run build:js",
+		"watch:css": "onchange 'src/scss/*.scss' -- npm run build:css"
 	},
 	"dependencies": {
 		"eslint": "^9.10.0",

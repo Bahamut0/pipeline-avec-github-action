@@ -3,9 +3,9 @@ name: CI/CD Node JS - Calcul
 on:
   push:
       branches:
-          - main
-tags:
-- "v*.*.*"
+        - main
+      tags:
+        - "v*.*.*"
 
 # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

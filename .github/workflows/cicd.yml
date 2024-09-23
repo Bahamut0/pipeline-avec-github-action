@@ -67,7 +67,7 @@ jobs:
         #   GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
 
       - name: Lint Code Base
-        run: npm lint
+        run: npm run lint
         # uses: sibiraj-s/action-eslint@v3
         # with:
         #   token: ${{ secrets.TEST_TOKEN }} # optional
@@ -80,7 +80,7 @@ jobs:
     # Test Jest et couverture du code #
     ###################################
       - name: Test avec Jest
-        run: npm test
+        run: npm run test
       - name: Couverture de code avec Coveralls
         uses: coverallsapp/github-action@v2
         with:

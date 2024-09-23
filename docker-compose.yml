@@ -5,8 +5,7 @@ services:
   backend_app_node:
     build: .
     container_name: backend_app_node
-    ports:
-      - "3000:3000"
+    stdin_open: true
     networks:
       app_node_net:
 
@@ -24,6 +23,7 @@ services:
       - backend_app_node
     networks:
       app_node_net:
+    
 
 networks:
   app_node_net:

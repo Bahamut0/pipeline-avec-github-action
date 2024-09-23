@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"test": "jest --coverage test/",
-		"start": "node ./public/scripts/index.js"
+		"start": "node ./src/calculate.js"
 	},
 	"dependencies": {
 		"eslint": "^9.10.0",

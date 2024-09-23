@@ -1,20 +1,39 @@
-const { multiply, divide, sum, sub } = require("../../src/calculate");
 
-// faire un formulaire dans le index.html où l'on calcule avec choix des nombres et de l'opérateur
-// récupérer l'id du champs total et afficher le résultat dans le champs total en dynamique
+function calcul(e) {
+ 
+  total = [parseInt(first_number.value), parseInt(second_number.value)];
 
-console.log("ok")
+  if(isNaN(total[0]) || isNaN(total[1])){
+    result.innerHTML = "Erreur. Merci de saisir un nombre"
+  }
+  else{
+    if(operator_select.value == "1"){
+      result.innerHTML = sum(total[0],total[1]);
+    }
+    if(operator_select.value == "2"){
+      result.innerHTML = sub(total[0],total[1]);
+    }
+    if(operator_select.value == "3"){
+      result.innerHTML = multiply(total[0],total[1]);
+    }
+    if(operator_select.value == "4"){
+      result.innerHTML = divide(total[0],total[1]);
+    }
+  }
 
-// window.addEventListener('load', function() {
-//     console.log(document.getElementById("number"));
-// }, false);
+}
 
+document.addEventListener("DOMContentLoaded", function() {
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     console.log(document.getElementById("ok"));
-// }, false);
+    result = document.getElementById("result");
+    form = document.getElementById("form");
+    first_number = document.getElementById("first_number");
+    second_number = document.getElementById("second_number");
+    operator_select = document.getElementById("operator_select");
+    button = document.getElementById("button");
+    operator = null
+    total = 0
 
+    button.addEventListener("click", calcul, false);
 
-// window.onload = function() {
-//     console.log(document.getElementById("number"));
-// };
+}, false);

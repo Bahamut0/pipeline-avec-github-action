@@ -59,12 +59,12 @@ jobs:
     ################################
     # Test Linter  #
     ################################
-      # - name: Lint Code Base
-      #   uses: github/super-linter@v4
-      #   env:
-      #     VALIDATE_ALL_CODEBASE: false
-      #     DEFAULT_BRANCH: main
-      #     GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
 
 
     ###################################
@@ -75,8 +75,7 @@ jobs:
       - name: Couverture de code avec Coveralls
         uses: coverallsapp/github-action@v2
         with:
-          token: ${{ secrets.COVERALLS_TOKEN }}
-
+          GITHUB_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
       
   deploy:
 

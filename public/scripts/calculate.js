@@ -14,6 +14,10 @@ function divide(a,b) {
 	return a / b;
 }
 
+sum(10,2);
+sub(10,2);
+multiply(10,2);
+divide(10,2);
 // module.exports = {sum,sub,multiply,divide};
 
 

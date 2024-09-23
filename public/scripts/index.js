@@ -1,5 +1,13 @@
 
-function calcul(e) {
+// let total = null;
+// let first_number = null;
+// let second_number = null;
+// let operator_select = null;
+// let result = null;
+// let button = null;
+
+
+function calcul() {
  
   total = [parseInt(first_number.value), parseInt(second_number.value)];
 

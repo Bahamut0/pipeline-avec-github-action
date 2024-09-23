@@ -31,9 +31,9 @@ jobs:
   build-and-test:
       runs-on: ubuntu-latest
       # runs-on: self-hosted
-      defaults:
-        run:
-          working-directory: ./src
+      # defaults:
+      #   run:
+      #     working-directory: ./src
 
       strategy:
           matrix:
@@ -51,7 +51,7 @@ jobs:
         run: ls
 
       - name: Installation des dépendances
-        run: npm install
+        run: npm ci
       - name: Liste des dépendances installées
         run: npm list
 
@@ -59,12 +59,21 @@ jobs:
     ################################
     # Test Linter  #
     ################################
+      # - name: Lint Code Base
+        # uses: github/super-linter@v4
+        # env:
+        #   VALIDATE_ALL_CODEBASE: false
+        #   DEFAULT_BRANCH: main
+        #   GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
+
       - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
+        run: npm lint
+        # uses: sibiraj-s/action-eslint@v3
+        # with:
+        #   token: ${{ secrets.TEST_TOKEN }} # optional
+        #   eslint-args: '--ignore-path=src/test --quiet'
+        #   extensions: 'js'
+        #   annotations: true
 
 
     ###################################

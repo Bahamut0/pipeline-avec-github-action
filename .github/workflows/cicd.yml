@@ -75,7 +75,7 @@ jobs:
       - name: Couverture de code avec Coveralls
         uses: coverallsapp/github-action@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+          github-token: ${{ secrets.COVERALLS_TOKEN }}
       
   deploy:
 

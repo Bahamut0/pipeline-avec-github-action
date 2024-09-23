@@ -44,6 +44,7 @@ WORKDIR /app
 
 COPY ./package*.json ./
 
+# npm ci install en fonction du package-lock.json au lieu du package.json (plus sécurisé)
 RUN npm ci
 
 COPY . .
@@ -52,6 +53,7 @@ COPY . .
 
 EXPOSE 3000
 
+RUN npm run lint
 RUN npm run test
 
 # CMD ["npm", "test"]
